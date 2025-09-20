@@ -1,0 +1,110 @@
+# Documentação do Sistema - Dashboard/page.tsx
+## 1. Estrutura do Arquivo dashboard/page.tsx
+### Estrutura da Interface
+- Imports (linhas 1-24) :
+  
+  - Imports de React, hooks (useState, useEffect), componentes UI (Button, Card, Dialog, etc.)
+  - Ícones do Lucide React (Plus, Users, LogOut, Edit, Trash2, Server, Eye, EyeOff, Tv, etc.)
+- Interface EmbyUser (linhas 26-45+) :
+  
+  - Define a estrutura de dados para usuários do Emby
+  - Inclui propriedades como id, name, serverId, hasPassword, isAdministrator
+  - Contém objeto policy com permissões (enableLiveTvAccess, enableLiveTvManagement, etc.)
+- Componente Principal (linha 102+) :
+  
+  - Função DashboardPage que retorna a interface do dashboard
+### Localização dos Dados dos Usuários
+- Estados (linhas 103-132) :
+  
+  - embyUsers : Array que armazena todos os usuários do Emby
+  - tvAccessCount : Contador de usuários com acesso à TV
+- Dados Mockados (linhas ~150-240) :
+  
+  - Array mockUsers com exemplos de usuários para desenvolvimento
+  - Usado quando não há conexão com o servidor Emby
+- Busca de Dados Reais (linhas ~250-270) :
+  
+  - Fetch para ${serverUrl}/Users?api_key=${apiKey}
+  - Armazena dados em embyUsers
+## 2. Seções do Dashboard
+### Área de Exibição de Estatísticas/Cards
+- Localização (linhas 1023-1048) :
+  - Logo após o header e antes da seção de gerenciamento de usuários
+  - Estrutura de grid responsivo: <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+### Seção Inicial do Dashboard
+- Header (linhas ~1000-1020) :
+  
+  - Contém logo, nome do servidor e botão de logout
+- Área de Cards (linhas 1023-1048) :
+  
+  - Grid para exibição de estatísticas
+  - Ideal para adição de novos cards informativos
+### Local para Inserção de Cards
+- Grid de Cards (linha 1024) :
+  - <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+  - Para adicionar novos cards, inserir novos elementos div dentro deste grid
+## 3. Lógica de Dados
+### Definição de Estados
+- Estados Principais (linhas 103-132) :
+  - Estados para usuários, loading, erros, formulários, etc.
+  - const [embyUsers, setEmbyUsers] = useState<any[]>([]);
+  - const [tvAccessCount, setTvAccessCount] = useState(0);
+### Busca de Dados dos Usuários
+- Dados Mockados (linhas ~240-245) :
+- Dados Reais (linhas ~260-270) :
+### Lógica de Contagem de Usuários com Acesso à TV
+- Filtro de Usuários (linhas ~263 e ~243) :
+  - Usa filter() para encontrar usuários com policy.enableLiveTvAccess === true
+  - Atualiza o estado tvAccessCount com o comprimento do array filtrado
+## 4. Componentes de Interface
+### Layout Principal do Dashboard
+- Estrutura (linhas ~1000-1070+) :
+### Seções para Adição de Novos Componentes
+- Área de Cards (linha 1024) :
+  
+  - Ideal para adicionar novos cards informativos
+  - Estrutura de grid que se adapta a diferentes tamanhos de tela
+- Antes da Lista de Usuários (linha ~1050) :
+  
+  - Espaço para adicionar componentes relacionados ao gerenciamento de usuários
+### Localização dos Imports de Ícones
+- Imports de Ícones (linha 23) :
+  - Para adicionar novos ícones, incluir na lista de imports
+## Guia Rápido para Implementação de Novos Cards
+1. 1.
+   Adicionar Estado :
+2. 2.
+   Implementar Lógica de Cálculo :
+3. 3.
+   Adicionar Card no Grid :
+   
+   ```
+   {/* Novo Card */}
+   <div className="bg-white shadow-sm 
+   rounded-lg p-4 border">
+     <div className="flex items-center">
+       <div className="p-3 rounded-full bg-
+       [cor]-100 text-[cor]-600 mr-4">
+         <IconeDesejado className="w-6 h-6" /
+         >
+       </div>
+       <div>
+         <h3 className="text-lg font-medium 
+         text-gray-900">Título do Card</h3>
+         <p className="text-3xl font-bold 
+         text-[cor]-600">{novoContador}</p>
+         <p className="text-sm 
+         text-gray-500">Descrição do 
+         contador</p>
+       </div>
+     </div>
+   </div>
+   ```
+4. 4.
+   Importar Novo Ícone (se necessário):
+   
+   ```
+   import { ..., NovoIcone } from 
+   "lucide-react"
+   ```
+Esta documentação fornece uma visão abrangente da estrutura do dashboard, facilitando a localização e modificação de componentes para implementação de novas funcionalidades
