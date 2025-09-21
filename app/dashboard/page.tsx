@@ -90,7 +90,7 @@ interface EmbySession {
     IsPaused: boolean
   }
   matchedUser?: EmbyUser // Usuário correspondente encontrado na lista de usuários
-  }
+  
 }
 
 function PluginStatusBadge({ serverUrl, apiKey, onStatus, onPluginData }: { serverUrl: string, apiKey: string, onStatus?: (status: 'ok' | 'fail' | 'loading') => void, onPluginData?: (data: any) => void }) {
