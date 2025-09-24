@@ -34,8 +34,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Define as variáveis de ambiente necessárias para o runtime
-ENV EMBY_ADMIN_USERNAME=""
-ENV EMBY_ADMIN_PASSWORD=""
+ENV NODE_ENV=production
 
 # Copia a build otimizada do estágio anterior
 # A configuração 'standalone' no next.config.mjs garante que a pasta .next/standalone
@@ -64,4 +63,5 @@ EXPOSE 3000
 ENTRYPOINT ["./entrypoint.sh"]
 
 # Define o comando padrão para o entrypoint
+
 CMD ["node", "server.js"]
